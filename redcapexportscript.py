@@ -7,27 +7,20 @@ Original file is located at
     https://colab.research.google.com/drive/1Qv_uSYuJtHZO-SgfjyLNft3RHXiN3yGs
 """
 
-#!pip install requests
-#!pip install pandas
-#!pip install dropbox
-#!pip install xlsxwriter
+
 from io import BytesIO
-from google.colab import userdata
 import requests
 import pandas as pd
 import dropbox
 from xlsxwriter import Workbook
 from datetime import datetime
-
 import requests
 import pandas as pd
 from io import BytesIO
-import dropbox
-from datetime import datetime
 
 def export_redcap_data():
     redcap_url = "https://redcap.sph.cuny.edu/api/"
-    token = userdata.get('RCAP_TOKEN')
+    token = os.getenv('RCAP_TOKEN')
 
     import_data = {
         'token': token,
@@ -51,7 +44,7 @@ def export_redcap_data():
 new_data = export_redcap_data()
 
 if new_data is not None:
-    dropbox_token = userdata.get('DROPBOX_KEY')
+    dropbox_token = os.getenv('DROPBOX_KEY')
     dbx = dropbox.Dropbox(dropbox_token)
 
     folder_path = "/Harlem Strong Participant List/1. Screening Logs/P3PhysicalLogs"
@@ -87,17 +80,3 @@ if new_data is not None:
         print("Error occurred; could not access or create new data.")
 else:
     print("No data exported from REDCap.")
-
-#Environment variables for running this serverlessly
-import os
-
-env_vars = {
-    "RCAP_TOKEN": "your_redcap_token_here",
-    "DROPBOX_KEY": "your_dropbox_key_here"
-}
-
-with open(".env", "w") as f:
-    for key, value in env_vars.items():
-        f.write(f"{key}={value}\n")
-from google.colab import files
-files.download('.env')
