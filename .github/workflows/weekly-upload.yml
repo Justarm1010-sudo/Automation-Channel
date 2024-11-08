@@ -27,4 +27,4 @@ jobs:
         env:
           RCAP_TOKEN: ${{ secrets.RCAP_TOKEN }}
           DROPBOX_KEY: ${{ secrets.DROPBOX_KEY }}
-        run: python redCapexportscript.py
+        run: python redcapexportscript.py
