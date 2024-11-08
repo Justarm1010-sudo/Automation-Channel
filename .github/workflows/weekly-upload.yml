@@ -3,6 +3,7 @@ name: Weekly REDCap to Dropbox Upload
 on:
   schedule:
     - cron: '0 0 * * 0'  # Runs every Sunday at midnight UTC
+  workflow_dispatch:      # Allows manual trigger
 
 jobs:
   upload:
@@ -26,4 +27,4 @@ jobs:
         env:
           RCAP_TOKEN: ${{ secrets.RCAP_TOKEN }}
           DROPBOX_KEY: ${{ secrets.DROPBOX_KEY }}
-        run: python RedCapExportScript.py
+        run: python redcap_dropbox_upload.py
