@@ -1,1 +1,29 @@
+name: Weekly REDCap to Dropbox Upload
 
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Runs every Sunday at midnight UTC
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Python script
+        env:
+          RCAP_TOKEN: ${{ secrets.RCAP_TOKEN }}
+          DROPBOX_KEY: ${{ secrets.DROPBOX_KEY }}
+        run: python redcap_dropbox_upload.py
