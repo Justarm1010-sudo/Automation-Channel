@@ -1,1 +1,1 @@
-
+Automation Channel for Redcap data to be uploaded to Dropbox using a Redcap API, DropboX API, and Github as a workflow channel. Runs weekly and uploads the latest Harlem Strong physical screening data for internal usage and analysis. 
