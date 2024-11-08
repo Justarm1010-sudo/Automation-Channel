@@ -2,4 +2,3 @@ requests
 pandas
 dropbox
 xlsxwriter
-io
