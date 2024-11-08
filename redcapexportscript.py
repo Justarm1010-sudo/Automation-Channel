@@ -16,7 +16,7 @@ from xlsxwriter import Workbook
 from datetime import datetime
 import requests
 import pandas as pd
-from io import BytesIO
+import os
 
 def export_redcap_data():
     redcap_url = "https://redcap.sph.cuny.edu/api/"
